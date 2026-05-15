@@ -27,6 +27,62 @@ const TESTIMONIALS = [
     company: "Pulse Media",
     rating: 5,
     image: "https://images.unsplash.com/photo-1580894732444-8ecded790047?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    quote: "Their color grading brought our documentary to life. The mood and tone were exactly what we envisioned. True masters of the craft.",
+    author: "David Kim",
+    role: "Film Director",
+    company: "Independent",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    quote: "We needed high-end VFX on a tight deadline, and Visual Craft IT delivered flawlessly. Their pipeline is incredibly efficient and secure.",
+    author: "Priya Patel",
+    role: "Post Producer",
+    company: "Atlas Films",
+    rating: 5,
+    image: null
+  },
+  {
+    quote: "The sound design they created for our commercial was immersive and impactful. It elevated the entire production to a new level of professionalism.",
+    author: "James Wilson",
+    role: "Creative Director",
+    company: "Echo Advertising",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    quote: "Their motion design team is top-tier. They translated complex technical concepts into beautiful, fluid animations that our audience loved.",
+    author: "Anita Sharma",
+    role: "Head of Content",
+    company: "Innovate AI",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    quote: "Consistently reliable and always pushing the boundaries. Visual Craft IT is our go-to studio for all 8K mastering and final delivery.",
+    author: "Thomas Miller",
+    role: "Technical Director",
+    company: "Global Broadcast",
+    rating: 5,
+    image: null
+  },
+  {
+    quote: "The trailer they cut for our game launch was explosive. Perfect pacing, incredible sound mix, and it built massive hype.",
+    author: "Chloe Dubois",
+    role: "Lead Marketer",
+    company: "Polyhedron Games",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    quote: "A true partnership. They don't just execute instructions; they bring artistic insight that makes the final product significantly better.",
+    author: "Robert Chang",
+    role: "Executive Producer",
+    company: "Horizon Media",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
   }
 ]
 

@@ -265,15 +265,29 @@ export function Hero({ onWatchReel }) {
                     style={{ left: x, top: y, width: 80, height: 80 }}
                   >
                     <button 
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
+                      onMouseEnter={(e) => {
+                        setIsHovering(true)
+                        gsap.to(e.currentTarget, {
+                          boxShadow: `0 0 30px -5px ${svc.color}80, inset 0 0 15px ${svc.color}40`,
+                          borderColor: svc.color,
+                          duration: 0.3
+                        })
+                      }}
+                      onMouseLeave={(e) => {
+                        setIsHovering(false)
+                        gsap.to(e.currentTarget, {
+                          boxShadow: '0 0 0px 0px rgba(0,0,0,0)',
+                          borderColor: activeIndex === index ? svc.color : 'rgba(255,255,255,0.04)',
+                          duration: 0.3
+                        })
+                      }}
                       onClick={() => handleToolClick(index)}
-                      className="relative rounded-full flex items-center justify-center overflow-hidden border transition-colors duration-500 pointer-events-auto cursor-pointer group"
+                      className="relative rounded-full flex items-center justify-center overflow-hidden border pointer-events-auto cursor-pointer group"
                       style={{ width: '100%', height: '100%', backdropFilter: 'blur(16px)' }}
                     >
                        <svc.icon 
                         size={32}
-                        className={`transition-all duration-300 ${activeIndex === index ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-300'}`}
+                        className={`transition-all duration-300 ${activeIndex === index ? 'text-white' : 'text-zinc-500 group-hover:text-white'}`}
                         strokeWidth={activeIndex === index ? 2 : 1.5}
                        />
                     </button>
