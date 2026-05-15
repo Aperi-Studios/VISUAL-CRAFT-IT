@@ -94,7 +94,7 @@ export function Preloader({ onComplete }) {
       </div>
       
       {/* Film Grain / Noise Overlay specific to preloader */}
-      <div className="absolute inset-0 z-30 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+      <div className="absolute inset-0 z-30 opacity-[0.03] bg-grain pointer-events-none" />
     </div>
   )
 }

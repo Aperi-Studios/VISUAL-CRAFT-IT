@@ -47,7 +47,7 @@ export function AudioPlayer() {
          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-600">{isPlaying ? 'On' : 'Off'}</span>
       </div>
       <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-black/40 backdrop-blur-xl group-hover:border-white transition-all text-white">
-         <div className="flex gap-0.5 items-end h-3">
+         <div className="relative flex gap-0.5 items-end h-3">
             {[1,2,3,4].map(i => (
               <motion.div 
                 key={i}

@@ -138,43 +138,52 @@ export function Testimonials({ onWatchVideo }) {
           </div>
         </CinematicReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 border border-white/5 relative z-10 min-h-[450px]">
+        <div 
+          className="relative z-10 min-h-[450px]"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <AnimatePresence mode="wait">
-            {visibleTestimonials.map((t, i) => (
-              <motion.div 
-                key={t.author + currentPage}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-[#020202] p-12 flex flex-col h-full group hover:bg-white/[0.02] transition-colors"
-              >
-                {t.image && (
-                  <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-8 border border-white/10 group-hover:border-white/20 transition-colors">
-                    <img src={t.image} className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-500" alt={t.author} />
-                  </div>
-                )}
+            <motion.div 
+              key={currentPage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 border border-white/5"
+            >
+              {visibleTestimonials.map((t, i) => (
+                <div 
+                  key={t.author}
+                  className="bg-[#020202] p-12 flex flex-col h-full group hover:bg-white/[0.02] transition-colors"
+                >
+                  {t.image && (
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-8 border border-white/10 group-hover:border-white/20 transition-colors">
+                      <img src={t.image} className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 transition-all duration-500" alt={t.author} />
+                    </div>
+                  )}
 
-                <div className="flex gap-1 mb-8">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} size={10} fill="white" className="text-white" />
-                  ))}
-                </div>
-                
-                <Quote size={32} className="text-white/5 mb-6 group-hover:text-white/10 transition-colors" />
-                
-                <p className="text-white text-lg font-medium leading-relaxed mb-auto italic">
-                  "{t.quote}"
-                </p>
-                
-                <div className="mt-12 flex items-end justify-between border-t border-white/5 pt-8">
-                  <div>
-                    <p className="text-white font-black uppercase tracking-widest text-[11px] mb-1">{t.author}</p>
-                    <p className="text-zinc-500 font-bold uppercase tracking-widest text-[9px]">{t.role} @ {t.company}</p>
+                  <div className="flex gap-1 mb-8">
+                    {[...Array(t.rating)].map((_, i) => (
+                      <Star key={i} size={10} fill="white" className="text-white" />
+                    ))}
+                  </div>
+                  
+                  <Quote size={32} className="text-white/5 mb-6 group-hover:text-white/10 transition-colors" />
+                  
+                  <p className="text-white text-lg font-medium leading-relaxed mb-auto italic">
+                    "{t.quote}"
+                  </p>
+                  
+                  <div className="mt-12 flex items-end justify-between border-t border-white/5 pt-8">
+                    <div>
+                      <p className="text-white font-black uppercase tracking-widest text-[11px] mb-1">{t.author}</p>
+                      <p className="text-zinc-500 font-bold uppercase tracking-widest text-[9px]">{t.role} @ {t.company}</p>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </motion.div>
           </AnimatePresence>
         </div>
       </div>
