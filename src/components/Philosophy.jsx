@@ -13,38 +13,38 @@ export function Philosophy() {
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={containerRef} id="philosophy" className="relative py-64 bg-black overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+    <section ref={containerRef} id="philosophy" className="relative py-24 md:py-64 bg-black overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 md:gap-24 items-center">
           <div className="lg:col-span-6">
             <CinematicReveal>
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-zinc-700 mb-12 block">
+              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-zinc-700 mb-8 md:mb-12 block">
                 The Artist's Creed —
               </span>
-              <div className="text-white text-7xl md:text-[9rem] font-black uppercase tracking-tighter leading-[0.75] mb-16">
+              <div className="text-white text-[clamp(3.5rem,12vw,9rem)] font-black uppercase tracking-tighter leading-[0.75] mb-12 md:mb-16">
                  <TextReveal>Vision</TextReveal>
                  <TextReveal delay={0.2}>Beyond</TextReveal>
                  <TextReveal delay={0.4} className="text-zinc-900 font-outline">Sight.</TextReveal>
               </div>
-              <div className="w-32 h-0.5 bg-white/20 mb-12" />
+              <div className="w-24 md:w-32 h-0.5 bg-white/20 mb-12" />
             </CinematicReveal>
           </div>
           
           <div className="lg:col-span-6 relative lg:pt-32">
             <CinematicReveal delay={0.3}>
-              <p className="text-zinc-400 text-3xl md:text-5xl font-light leading-[1.1] tracking-tight mb-16 italic">
+              <p className="text-zinc-400 text-2xl md:text-5xl font-light leading-[1.1] tracking-tight mb-12 md:mb-16 italic">
                 "We don't just edit video. We <span className="text-white">frame emotions</span>. We color the subtext. We build worlds that didn't exist yesterday so they can live forever tomorrow."
               </p>
               
-              <div className="flex items-center gap-8">
-                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-950 border border-white/5 shadow-2xl overflow-hidden p-0.5">
+              <div className="flex items-center gap-6 md:gap-8">
+                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-zinc-800 to-zinc-950 border border-white/5 shadow-2xl overflow-hidden p-0.5">
                     <div className="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center">
-                       <span className="text-zinc-600 font-black text-xs">FC</span>
+                       <span className="text-zinc-600 font-black text-[10px] md:text-xs">FC</span>
                     </div>
                  </div>
                  <div className="space-y-1">
-                   <p className="text-white font-black uppercase tracking-[0.2em] text-sm">Lead Artist</p>
-                   <p className="text-zinc-700 font-bold uppercase tracking-[0.3em] text-[10px]">Founder @ Visual Craft IT</p>
+                   <p className="text-white font-black uppercase tracking-[0.2em] text-xs md:text-sm">Lead Artist</p>
+                   <p className="text-zinc-700 font-bold uppercase tracking-[0.3em] text-[8px] md:text-[10px]">Founder @ Visual Craft IT</p>
                  </div>
               </div>
             </CinematicReveal>

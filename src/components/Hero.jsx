@@ -31,16 +31,25 @@ export function Hero({ onWatchReel }) {
   const [bgIndex, setBgIndex] = useState(0)
   const [rotationStep, setRotationStep] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
   const heroRef = useRef(null)
   const contentRef = useRef(null)
   const mainWheelRef = useRef(null)
   const itemsRef = useRef([])
   const containerRef = useRef(null)
 
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const isMobile = windowWidth < 768
   const TOTAL_SERVICES = SERVICES.length
   const ANGLE_PER_STEP = 360 / TOTAL_SERVICES
-  const RADIUS = 340
+  const RADIUS = isMobile ? 180 : 340
   const WHEEL_SIZE = RADIUS * 2
+  const ITEM_SIZE = isMobile ? 50 : 80
 
   const handleToolClick = (index) => {
     const activeIndex = ((rotationStep % TOTAL_SERVICES) + TOTAL_SERVICES) % TOTAL_SERVICES
@@ -92,12 +101,12 @@ export function Hero({ onWatchReel }) {
       let targetZ = 10
 
       if (isActive) {
-        targetScale = 1.45
+        targetScale = isMobile ? 1.2 : 1.45
         targetOpacity = 1
         targetBlur = 0
         targetZ = 50
       } else if (displayDist >= 2) {
-        targetScale = 0.75
+        targetScale = isMobile ? 0.6 : 0.75
         targetOpacity = 0.15
         targetBlur = 8
         targetZ = 5
@@ -124,7 +133,7 @@ export function Hero({ onWatchReel }) {
       
       gsap.set(item, { zIndex: targetZ })
     })
-  }, { dependencies: [rotationStep], scope: containerRef })
+  }, { dependencies: [rotationStep, isMobile], scope: containerRef })
 
   useGSAP(() => {
     gsap.to(contentRef.current, {
@@ -145,8 +154,8 @@ export function Hero({ onWatchReel }) {
   const getCoordinates = (index) => {
     const baseAngle = 270 + (index * ANGLE_PER_STEP)
     const rad = (baseAngle * Math.PI) / 180
-    const x = RADIUS + RADIUS * Math.cos(rad) - 40
-    const y = RADIUS + RADIUS * Math.sin(rad) - 40
+    const x = RADIUS + RADIUS * Math.cos(rad) - (ITEM_SIZE / 2)
+    const y = RADIUS + RADIUS * Math.sin(rad) - (ITEM_SIZE / 2)
     return { x, y }
   }
 
@@ -173,29 +182,29 @@ export function Hero({ onWatchReel }) {
               <motion.div 
                 animate={{ backgroundColor: activeService.color }}
                 transition={{ duration: 0.8 }}
-                className="absolute top-[-200px] w-[600px] h-[600px] rounded-full blur-[140px] opacity-[0.15]" 
+                className="absolute top-[-200px] w-[300px] md:w-[600px] h-[300px] md:h-[600px] rounded-full blur-[100px] md:blur-[140px] opacity-[0.15]" 
               />
               <motion.div 
                 animate={{ backgroundColor: activeService.color }}
                 transition={{ duration: 0.8 }}
-                className="absolute top-[100px] w-[1200px] h-[500px] rounded-[100%] blur-[200px] opacity-[0.08]" 
+                className="absolute top-[100px] w-[800px] md:w-[1200px] h-[300px] md:h-[500px] rounded-[100%] blur-[150px] md:blur-[200px] opacity-[0.08]" 
               />
            </div>
         </div>
 
-        <div ref={contentRef} className="relative z-20 text-center px-6 pt-40 mb-12">
+        <div ref={contentRef} className="relative z-20 text-center px-6 pt-24 md:pt-40 mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl mb-10 text-white"
+            className="inline-flex items-center gap-2 px-4 md:px-5 py-1.5 md:py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl mb-8 md:mb-10 text-white"
           >
-            <Sparkles size={14} className="text-zinc-500" />
-            <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-zinc-400">Master Editing Studio</span>
+            <Sparkles size={12} className="text-zinc-500" />
+            <span className="text-[9px] md:text-[10px] font-bold tracking-[0.25em] uppercase text-zinc-400">Master Editing Studio</span>
           </motion.div>
 
-          <div className="text-[clamp(3.5rem,10vw,8.5rem)] font-black uppercase tracking-[-0.04em] leading-[0.85] text-white flex flex-col items-center mb-12">
+          <div className="text-[clamp(2.5rem,10vw,8.5rem)] font-black uppercase tracking-[-0.04em] leading-[0.85] text-white flex flex-col items-center mb-10 md:mb-12">
             <TextReveal>Frame</TextReveal>
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center justify-center gap-3 md:gap-4">
                <TextReveal delay={0.2} className="text-zinc-500 italic font-light tracking-tight">The</TextReveal>
                <TextReveal delay={0.4}>Unseen</TextReveal>
             </div>
@@ -203,7 +212,7 @@ export function Hero({ onWatchReel }) {
           
           <button 
             onClick={onWatchReel}
-            className="group relative inline-flex items-center gap-6 bg-white text-black px-12 py-6 rounded-full font-black uppercase tracking-widest text-xs transition-transform hover:scale-105 active:scale-95 shadow-[0_0_50px_rgba(255,255,255,0.15)] overflow-hidden"
+            className="group relative inline-flex items-center gap-4 md:gap-6 bg-white text-black px-8 md:px-12 py-4 md:py-6 rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs transition-transform hover:scale-105 active:scale-95 shadow-[0_0_50px_rgba(255,255,255,0.15)] overflow-hidden"
           >
             <motion.div 
               animate={{ x: ['-200%', '300%'] }}
@@ -211,31 +220,32 @@ export function Hero({ onWatchReel }) {
               className="absolute inset-0 w-1/3 h-full bg-gradient-to-r from-transparent via-black/10 to-transparent skew-x-[-20deg]"
             />
             <span className="relative z-10">Launch Showreel</span>
-            <div className="relative z-10 w-8 h-8 rounded-full bg-black flex items-center justify-center group-hover:bg-zinc-800 transition-colors">
-               <Play size={14} fill="white" className="ml-0.5" />
+            <div className="relative z-10 w-6 h-6 md:w-8 md:h-8 rounded-full bg-black flex items-center justify-center group-hover:bg-zinc-800 transition-colors">
+               <Play size={10} fill="white" className="ml-0.5 md:hidden" />
+               <Play size={14} fill="white" className="ml-0.5 hidden md:block" />
             </div>
           </button>
         </div>
 
-        <div className="relative w-full max-w-[1200px] h-[650px] mt-auto flex justify-center pointer-events-none text-white">
+        <div className="relative w-full max-w-[1200px] h-[400px] md:h-[650px] mt-auto flex justify-center pointer-events-none text-white">
           
-          <div className="absolute top-[260px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center text-center w-96">
-            <span className="text-zinc-500 uppercase tracking-[0.4em] text-[10px] font-black mb-4">Post-Production Power</span>
+          <div className="absolute top-[80px] md:top-[260px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center text-center w-full max-w-[320px] md:max-w-96 px-4">
+            <span className="text-zinc-500 uppercase tracking-[0.4em] text-[8px] md:text-[10px] font-black mb-3 md:mb-4">Post-Production Power</span>
             <AnimatePresence mode="wait">
               <motion.div 
                 key={activeService.id}
-                initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -15, scale: 0.95 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 className="flex flex-col items-center"
               >
-                <h2 className="text-5xl md:text-6xl font-black text-white mb-3 tracking-tighter drop-shadow-2xl">{activeService.name}</h2>
-                <p className="text-sm text-zinc-500 font-bold uppercase tracking-[0.2em]">{activeService.desc}</p>
+                <h2 className="text-3xl md:text-6xl font-black text-white mb-2 md:mb-3 tracking-tighter drop-shadow-2xl">{activeService.name}</h2>
+                <p className="text-[10px] md:text-sm text-zinc-500 font-bold uppercase tracking-[0.2em]">{activeService.desc}</p>
                 <motion.div 
                   initial={{ width: 0 }}
-                  animate={{ width: 80 }}
-                  className="mt-8 h-[2px] rounded-full"
+                  animate={{ width: isMobile ? 40 : 80 }}
+                  className="mt-6 md:mt-8 h-[2px] rounded-full"
                   style={{ backgroundColor: activeService.color, boxShadow: `0 0 30px 2px ${activeService.color}` }}
                 />
               </motion.div>
@@ -248,12 +258,12 @@ export function Hero({ onWatchReel }) {
           >
             <div 
               ref={mainWheelRef}
-              className="absolute top-[80px]" 
+              className="absolute top-[40px] md:top-[80px]" 
               style={{ width: WHEEL_SIZE, height: WHEEL_SIZE }}
             >
               <div className="absolute inset-0 rounded-full border border-white/[0.04] shadow-[inset_0_0_120px_rgba(255,255,255,0.02)]" />
-              <motion.div animate={{ rotate: 360 }} transition={{ duration: 100, repeat: Infinity, ease: "linear" }} className="absolute inset-[-30px] rounded-full border border-dashed border-white/[0.03]" />
-              <motion.div animate={{ rotate: -360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="absolute inset-[30px] rounded-full border border-dotted border-white/[0.08] opacity-40" />
+              <motion.div animate={{ rotate: 360 }} transition={{ duration: 100, repeat: Infinity, ease: "linear" }} className="absolute inset-[-20px] md:inset-[-30px] rounded-full border border-dashed border-white/[0.03]" />
+              <motion.div animate={{ rotate: -360 }} transition={{ duration: 40, repeat: Infinity, ease: "linear" }} className="absolute inset-[20px] md:inset-[30px] rounded-full border border-dotted border-white/[0.08] opacity-40" />
 
               {SERVICES.map((svc, index) => {
                 const { x, y } = getCoordinates(index)
@@ -262,7 +272,7 @@ export function Hero({ onWatchReel }) {
                     key={svc.id} 
                     ref={el => itemsRef.current[index] = el}
                     className="absolute flex items-center justify-center text-white" 
-                    style={{ left: x, top: y, width: 80, height: 80 }}
+                    style={{ left: x, top: y, width: ITEM_SIZE, height: ITEM_SIZE }}
                   >
                     <button 
                       onMouseEnter={(e) => {
@@ -286,13 +296,13 @@ export function Hero({ onWatchReel }) {
                       style={{ width: '100%', height: '100%', backdropFilter: 'blur(16px)' }}
                     >
                        <svc.icon 
-                        size={32}
+                        size={isMobile ? 20 : 32}
                         className={`transition-all duration-300 ${activeIndex === index ? 'text-white' : 'text-zinc-500 group-hover:text-white'}`}
                         strokeWidth={activeIndex === index ? 2 : 1.5}
                        />
                     </button>
-                    <div className="service-label absolute top-[100px] w-32 text-center pointer-events-none opacity-0">
-                       <span className="text-[10px] font-bold uppercase tracking-widest text-white whitespace-nowrap drop-shadow-md">{svc.name}</span>
+                    <div className="service-label absolute top-[110%] w-24 md:w-32 text-center pointer-events-none opacity-0">
+                       <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-white whitespace-nowrap drop-shadow-md">{svc.name}</span>
                     </div>
                   </div>
                 )

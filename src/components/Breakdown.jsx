@@ -28,7 +28,7 @@ function ComparisonSlider() {
       ref={containerRef}
       onMouseMove={handleMove}
       onTouchMove={(e) => handleMove(e.touches[0])}
-      className="relative w-full aspect-video md:aspect-[21/9] bg-zinc-900 overflow-hidden cursor-ew-resize rounded-2xl border border-white/5"
+      className="relative w-full aspect-video md:aspect-[21/9] bg-zinc-900 overflow-hidden cursor-ew-resize rounded-2xl border border-white/5 touch-none"
     >
       {/* After Image */}
       <img src={BREAKDOWNS[0].after} className="absolute inset-0 w-full h-full object-cover" alt="After" />
@@ -46,17 +46,18 @@ function ComparisonSlider() {
         className="absolute inset-y-0 w-px bg-white z-20"
         style={{ left: `${sliderPos}%` }}
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-2xl">
-           <Scan size={20} className="text-black" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center shadow-2xl">
+           <Scan size={16} className="text-black md:hidden" />
+           <Scan size={20} className="text-black hidden md:block" />
         </div>
       </div>
 
       {/* Labels */}
-      <div className="absolute bottom-6 left-6 z-30 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-        <span className="text-[10px] font-black uppercase tracking-widest text-white">Source Plate</span>
+      <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 z-30 bg-black/40 backdrop-blur-md px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white/10">
+        <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white">Source Plate</span>
       </div>
-      <div className="absolute bottom-6 right-6 z-30 bg-white px-4 py-2 rounded-full">
-        <span className="text-[10px] font-black uppercase tracking-widest text-black">Final Frame</span>
+      <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 z-30 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-full">
+        <span className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-black">Final Frame</span>
       </div>
     </div>
   )
@@ -72,23 +73,23 @@ export function Breakdown() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
 
   return (
-    <section ref={containerRef} className="relative py-48 bg-[#020202]">
-      <motion.div style={{ opacity }} className="max-w-[1400px] mx-auto px-8">
-        <div className="flex flex-col items-center text-center mb-32">
+    <section ref={containerRef} className="relative py-24 md:py-48 bg-[#020202] overflow-hidden">
+      <motion.div style={{ opacity }} className="max-w-[1400px] mx-auto px-6 md:px-8">
+        <div className="flex flex-col items-center text-center mb-16 md:mb-32">
            <motion.div 
              initial={{ scale: 0.9, opacity: 0 }}
              whileInView={{ scale: 1, opacity: 1 }}
-             className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-8"
+             className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center mb-6 md:mb-8"
            >
-             <Sparkles size={20} className="text-zinc-500" />
+             <Sparkles size={18} className="text-zinc-500" />
            </motion.div>
            
-           <div className="text-white text-6xl md:text-[7rem] font-black uppercase tracking-tighter leading-[0.8] mb-12 flex flex-col items-center">
+           <div className="text-white text-[clamp(2.5rem,10vw,7rem)] font-black uppercase tracking-tighter leading-[0.8] mb-8 md:mb-12 flex flex-col items-center">
               <TextReveal>The Magic of</TextReveal>
               <TextReveal delay={0.3} className="text-zinc-800">The Breakdown</TextReveal>
            </div>
 
-           <p className="text-zinc-500 text-lg font-medium max-w-xl italic">
+           <p className="text-zinc-500 text-base md:text-lg font-medium max-w-xl italic px-4">
              Visual trust is built layer by layer. Explore the technical complexity hidden behind every cinematic masterpiece we deliver.
            </p>
         </div>
@@ -97,10 +98,10 @@ export function Breakdown() {
           <div className="lg:col-span-9">
             <ComparisonSlider />
           </div>
-          <div className="lg:col-span-3 space-y-12 lg:pt-8">
-            <div className="bg-white/[0.01] border border-white/5 p-10 rounded-2xl">
-              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-600 block mb-10">Layer Stack —</span>
-              <ul className="space-y-6">
+          <div className="lg:col-span-3 space-y-8 md:space-y-12 lg:pt-8">
+            <div className="bg-white/[0.01] border border-white/5 p-6 md:p-10 rounded-2xl">
+              <span className="text-[9px] font-black uppercase tracking-[0.4em] text-zinc-600 block mb-6 md:mb-10">Layer Stack —</span>
+              <ul className="space-y-4 md:space-y-6">
                 {BREAKDOWNS[0].layers.map(layer => (
                   <li key={layer} className="flex items-center justify-between border-b border-white/5 pb-4 group cursor-default">
                     <span className="text-white font-black tracking-widest text-[11px] uppercase group-hover:translate-x-2 transition-transform">{layer}</span>

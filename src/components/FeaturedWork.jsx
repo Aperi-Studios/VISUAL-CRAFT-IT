@@ -53,15 +53,16 @@ function ProjectCard({ project, index }) {
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90 group-hover:opacity-60 transition-opacity duration-700" />
       
       {/* Content */}
-      <div className="absolute inset-0 p-12 flex flex-col justify-end">
+      <div className="absolute inset-0 p-6 md:p-12 flex flex-col justify-end">
         <div className="flex items-end justify-between">
-           <div className="space-y-4">
-             <span className="text-[10px] font-black tracking-[0.4em] text-zinc-500 uppercase block">{project.category} // {project.year}</span>
-             <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.8] group-hover:translate-x-4 transition-transform duration-700">{project.title}</h3>
+           <div className="space-y-2 md:space-y-4">
+             <span className="text-[8px] md:text-[10px] font-black tracking-[0.4em] text-zinc-500 uppercase block">{project.category} // {project.year}</span>
+             <h3 className="text-3xl md:text-6xl font-black text-white tracking-tighter uppercase leading-[0.8] group-hover:translate-x-4 transition-transform duration-700">{project.title}</h3>
            </div>
            <div className="flex flex-col items-end opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-             <div className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center bg-white text-black">
-               <ArrowUpRight size={24} />
+             <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center bg-white text-black">
+               <ArrowUpRight size={18} className="md:hidden" />
+               <ArrowUpRight size={24} className="hidden md:block" />
              </div>
            </div>
         </div>
@@ -72,19 +73,19 @@ function ProjectCard({ project, index }) {
 
 export function FeaturedWork({ onProjectClick }) {
   return (
-    <section id="work" className="relative py-48 bg-[#020202]">
-      <div className="max-w-[1400px] mx-auto px-8">
-        <CinematicReveal className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-end">
+    <section id="work" className="relative py-24 md:py-48 bg-[#020202]">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-8">
+        <CinematicReveal className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-16 md:mb-32 items-end">
           <div className="lg:col-span-8">
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600 mb-8 block">
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600 mb-6 md:mb-8 block">
               Portfolio —
             </span>
-            <h2 className="text-white text-7xl md:text-[8rem] font-black uppercase tracking-tighter leading-[0.75]">
+            <h2 className="text-white text-[clamp(3rem,10vw,8rem)] font-black uppercase tracking-tighter leading-[0.75]">
               Selected <br /> <span className="text-zinc-800">Masterpieces</span>
             </h2>
           </div>
-          <div className="lg:col-span-4 pb-8">
-            <p className="text-zinc-500 text-lg font-medium leading-relaxed max-w-sm italic">
+          <div className="lg:col-span-4 pb-0 md:pb-8">
+            <p className="text-zinc-500 text-base md:text-lg font-medium leading-relaxed max-w-sm italic">
               A curated collection of visual experiences crafted for clients who demand nothing less than perfection.
             </p>
           </div>

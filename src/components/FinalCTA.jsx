@@ -5,32 +5,32 @@ import { TextReveal } from './TextReveal'
 
 export function FinalCTA() {
   return (
-    <section className="relative py-64 bg-[#020202] overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+    <section className="relative py-32 md:py-64 bg-[#020202] overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center text-center"
         >
-          <span className="text-[11px] font-black uppercase tracking-[0.6em] text-zinc-700 mb-16 block">Final Scene —</span>
+          <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.6em] text-zinc-700 mb-12 md:mb-16 block">Final Scene —</span>
           
-          <div className="text-white text-[clamp(4rem,18vw,15rem)] font-black uppercase tracking-[ -0.06em] leading-[0.7] mb-32 flex flex-col items-center">
+          <div className="text-white text-[clamp(2.5rem,15vw,15rem)] font-black uppercase tracking-[-0.06em] leading-[0.7] mb-16 md:mb-32 flex flex-col items-center">
              <TextReveal>Let's</TextReveal>
              <TextReveal delay={0.2} className="text-zinc-900 font-outline">Create</TextReveal>
              <TextReveal delay={0.4}>History.</TextReveal>
           </div>
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-16">
-             <button className="group relative bg-white text-black px-16 py-8 rounded-full font-black uppercase tracking-[0.3em] text-sm overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_100px_rgba(255,255,255,0.1)]">
-                <span className="relative z-10 flex items-center gap-6">
-                  Initiate Project <ArrowRight size={20} />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+             <button className="group relative bg-white text-black px-10 md:px-16 py-6 md:py-8 rounded-full font-black uppercase tracking-[0.3em] text-[11px] md:text-sm overflow-hidden transition-transform hover:scale-105 active:scale-95 shadow-[0_0_100px_rgba(255,255,255,0.1)]">
+                <span className="relative z-10 flex items-center gap-4 md:gap-6">
+                  Initiate Project <ArrowRight size={18} className="md:hidden" /> <ArrowRight size={20} className="hidden md:block" />
                 </span>
              </button>
              
-             <div className="text-left border-l border-white/10 pl-12">
-                <p className="text-zinc-600 text-xs font-black uppercase tracking-[0.4em] mb-3">Available for new ventures</p>
-                <p className="text-white text-sm font-black uppercase tracking-[0.2em] leading-none">Global Studio // 2024</p>
+             <div className="text-center md:text-left border-t md:border-t-0 md:border-l border-white/10 pt-8 md:pt-0 md:pl-12">
+                <p className="text-zinc-600 text-[10px] font-black uppercase tracking-[0.4em] mb-2 md:mb-3">Available for new ventures</p>
+                <p className="text-white text-xs md:text-sm font-black uppercase tracking-[0.2em] leading-none">Global Studio // 2024</p>
              </div>
           </div>
         </motion.div>

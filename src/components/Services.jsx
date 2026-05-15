@@ -71,10 +71,10 @@ export function Services() {
          <span className="text-[30vw] font-black text-white tracking-tighter uppercase">CAPABILITY</span>
       </div>
 
-      <div className="absolute top-24 left-8 z-10">
+      <div className="absolute top-12 md:top-24 left-6 md:left-8 z-10">
          <CinematicReveal>
-           <span className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600 block mb-4">Post-Production Power —</span>
-           <h2 className="text-white text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none">
+           <span className="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-600 block mb-3 md:mb-4">Post-Production Power —</span>
+           <h2 className="text-white text-[clamp(2.5rem,10vw,8rem)] md:text-8xl font-black uppercase tracking-tighter leading-none">
              Expert <br /> <span className="text-zinc-600">Services.</span>
            </h2>
          </CinematicReveal>
@@ -95,12 +95,12 @@ export function Services() {
           </CinematicReveal>
       </div>
 
-      <div className="h-full flex items-center pt-32">
-        <div ref={wrapperRef} className="flex gap-8 px-[10vw] md:px-[20vw]">
+      <div className="h-full flex items-center pt-24 md:pt-32">
+        <div ref={wrapperRef} className="flex gap-6 md:gap-8 px-[8vw] md:px-[20vw]">
           {SERVICES.map((svc, i) => (
             <div
               key={svc.num}
-              className="flex-shrink-0 w-[85vw] md:w-[60vw] max-w-4xl h-[60vh] min-h-[500px] relative group rounded-3xl overflow-hidden bg-zinc-900 border border-white/10"
+              className="flex-shrink-0 w-[82vw] md:w-[60vw] max-w-4xl h-[55vh] md:h-[60vh] min-h-[450px] md:min-h-[500px] relative group rounded-2xl md:rounded-3xl overflow-hidden bg-zinc-900 border border-white/10"
             >
               {/* Dynamic Video Background on Hover */}
               <img 
@@ -110,26 +110,27 @@ export function Services() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               
-              <div className="absolute inset-0 p-12 flex flex-col justify-end">
+              <div className="absolute inset-0 p-8 md:p-12 flex flex-col justify-end">
                 <div className="flex items-start justify-between mb-auto">
-                   <span className="text-white font-black text-2xl tracking-tighter bg-black/50 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10">
+                   <span className="text-white font-black text-xl md:text-2xl tracking-tighter bg-black/50 px-3 py-1.5 md:px-4 md:py-2 rounded-xl backdrop-blur-md border border-white/10">
                      {svc.num}
                    </span>
-                   <div className="w-16 h-16 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
-                     <svc.icon size={32} className="text-white group-hover:text-black transition-colors" />
+                   <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
+                     <svc.icon size={24} className="text-white group-hover:text-black md:hidden transition-colors" />
+                     <svc.icon size={32} className="text-white group-hover:text-black hidden md:block transition-colors" />
                    </div>
                 </div>
                 
-                <h3 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-6">
+                <h3 className="text-3xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none mb-4 md:mb-6">
                   {svc.title}
                 </h3>
                 
-                <p className="text-zinc-300 text-lg md:text-xl font-medium leading-relaxed max-w-2xl">
+                <p className="text-zinc-300 text-sm md:text-xl font-medium leading-relaxed max-w-2xl">
                   {svc.description}
                 </p>
 
-                <div className="mt-8 pt-8 border-t border-white/10 flex items-center gap-8">
-                   <button className="px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-xs rounded-full hover:scale-105 active:scale-95 transition-transform shadow-2xl">
+                <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-white/10 flex items-center gap-6 md:gap-8">
+                   <button className="px-6 py-3 md:px-8 md:py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] md:text-xs rounded-full hover:scale-105 active:scale-95 transition-transform shadow-2xl">
                      Explore Capability
                    </button>
                 </div>

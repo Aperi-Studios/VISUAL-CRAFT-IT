@@ -126,7 +126,7 @@ export function Navigation({ onWatchReel }) {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 bg-black z-[1000] flex flex-col p-12"
           >
-            <div className="mt-24 flex flex-col gap-8">
+            <div className="mt-24 flex flex-col gap-6 md:gap-8">
               {NAV_LINKS.map((link, i) => (
                 <motion.a 
                   key={link.name} 
@@ -141,7 +141,7 @@ export function Navigation({ onWatchReel }) {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 + i * 0.1 }}
-                  className="text-6xl font-black tracking-tighter text-zinc-800 hover:text-white transition-colors"
+                  className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-zinc-800 hover:text-white transition-colors"
                 >
                   {link.name}
                 </motion.a>
