@@ -1,76 +1,100 @@
-import React, { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Play } from 'lucide-react'
+import React, { useRef, useState } from 'react'
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 
 export function Preloader({ onComplete }) {
-  const [progress, setProgress] = useState(0)
-  const [isDone, setIsDone] = useState(false)
+  const containerRef = useRef(null)
+  const counterRef = useRef(null)
+  const textRef1 = useRef(null)
+  const textRef2 = useRef(null)
+  const shutterTopRef = useRef(null)
+  const shutterBottomRef = useRef(null)
+  const [isReady, setIsReady] = useState(false)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval)
-          setTimeout(() => setIsDone(true), 500)
-          setTimeout(() => onComplete(), 1200)
-          return 100
-        }
-        return prev + 1
-      })
-    }, 20)
-    return () => clearInterval(interval)
-  }, [onComplete])
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsReady(true)
+        if (onComplete) onComplete()
+      }
+    })
+
+    // Cinematic Counter
+    tl.to(counterRef.current, {
+      innerHTML: 100,
+      duration: 2.5,
+      snap: { innerHTML: 1 },
+      ease: "power4.inOut"
+    }, 0)
+
+    // Flash text 1 (Top)
+    tl.fromTo(textRef1.current, 
+      { opacity: 0, y: 10, filter: 'blur(5px)' },
+      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: "power2.out" },
+      0.5
+    )
+
+    // Flash text 2 (Bottom)
+    tl.fromTo(textRef2.current,
+      { opacity: 0, y: -10, filter: 'blur(5px)' },
+      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: "power2.out" },
+      1.0
+    )
+
+    // Fade out text and counter
+    tl.to([counterRef.current, counterRef.current.nextSibling, textRef1.current, textRef2.current], {
+      opacity: 0,
+      scale: 1.05,
+      filter: 'blur(10px)',
+      duration: 0.6,
+      ease: "power2.in"
+    }, 2.8)
+
+    // Open Cinematic Shutter
+    tl.to(shutterTopRef.current, {
+      yPercent: -100,
+      duration: 1.2,
+      ease: "expo.inOut"
+    }, 3.2)
+
+    tl.to(shutterBottomRef.current, {
+      yPercent: 100,
+      duration: 1.2,
+      ease: "expo.inOut"
+    }, 3.2)
+
+  }, { scope: containerRef })
+
+  if (isReady) return null
 
   return (
-    <AnimatePresence>
-      {!isDone && (
-        <motion.div
-          exit={{ y: '-100%' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center p-8"
-        >
-          {/* Central Logo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative mb-24"
-          >
-            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center rotate-45">
-               <Play size={24} className="text-black -rotate-45 ml-1 fill-black" />
-            </div>
-            <motion.div 
-              animate={{ rotate: 360 }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-[-20px] rounded-full border border-dashed border-white/20" 
-            />
-          </motion.div>
+    <div ref={containerRef} className="fixed inset-0 z-[10000] pointer-events-none flex flex-col">
+      {/* Shutters */}
+      <div ref={shutterTopRef} className="absolute top-0 left-0 w-full h-[50.5vh] bg-[#020202] z-10" />
+      <div ref={shutterBottomRef} className="absolute bottom-0 left-0 w-full h-[50.5vh] bg-[#020202] z-10" />
+      
+      <div className="absolute top-1/2 left-0 w-full h-px bg-white/10 z-[11]" />
+      
+      {/* Content */}
+      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center text-white">
+           <span ref={textRef1} className="text-[10px] font-black uppercase tracking-[1em] text-white/50 mb-4 block ml-[1em]">
+             Establishing Connection
+           </span>
+           
+           <div className="flex items-start gap-2 overflow-hidden">
+              <span ref={counterRef} className="text-[15vw] md:text-[12rem] font-black leading-none tracking-tighter tabular-nums">0</span>
+              <span className="text-2xl md:text-5xl font-black text-white/30 mt-4 md:mt-8">%</span>
+           </div>
 
-          <div className="w-full max-w-xs space-y-4">
-            <div className="flex justify-between items-end">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">Initialising</span>
-              <span className="text-xl font-black text-white">{progress}%</span>
-            </div>
-            <div className="h-px w-full bg-white/10 relative overflow-hidden">
-               <motion.div 
-                 initial={{ scaleX: 0 }}
-                 animate={{ scaleX: progress / 100 }}
-                 className="absolute inset-0 bg-white origin-left"
-               />
-            </div>
-            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-600 text-center">
-              Orchestrating Cinematic Excellence
-            </p>
-          </div>
-
-          {/* Decorative Corner Numbers (Coded aesthetic) */}
-          <div className="absolute top-12 left-12 text-[10px] font-mono text-zinc-800">
-            SEC_AUTH // 001.FC.STUDIO
-          </div>
-          <div className="absolute bottom-12 right-12 text-[10px] font-mono text-zinc-800">
-            LAT: 34.0522 N // LON: 118.2437 W
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+           <span ref={textRef2} className="text-xl md:text-3xl font-black uppercase tracking-[0.5em] text-white mt-4 block ml-[0.5em]">
+             Visual Craft IT
+           </span>
+        </div>
+      </div>
+      
+      {/* Film Grain / Noise Overlay specific to preloader */}
+      <div className="absolute inset-0 z-30 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+    </div>
   )
 }

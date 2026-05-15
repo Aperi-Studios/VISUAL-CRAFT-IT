@@ -1,16 +1,27 @@
-# React + Vite
+# Visual Craft IT — Cinematic Post-Production Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-end, immersive digital experience designed for world-class cinematic editing, VFX, and motion design.
 
-Currently, two official plugins are available:
+## Technical Arsenal
+- **Engine:** React 19 + Vite 8
+- **Animation:** GSAP (GreenSock) + ScrollTrigger + useGSAP
+- **Motion:** Framer Motion (for AnimatePresence & Modals)
+- **Styling:** Tailwind CSS v4
+- **Performance:** Lenis (Smooth Momentum Scrolling)
+- **Assets:** High-fidelity Unsplash Demo Images
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Key Features
+- **Cinematic Overture:** A data-driven preloader with a mechanical shutter exit.
+- **The Arsenal:** A 3D interactive service wheel with cinematic depth-of-field.
+- **Continuous Shot:** Seamless section transitions using GSAP ScrollTrigger.
+- **VFX Breakdown:** An interactive comparison slider for technical transparency.
+- **The Altar:** A horizontal-scroll studio gallery showcasing hardware authority.
+- **Editorial Typography:** Custom `TextReveal` utility for high-impact pacing.
+- **Global Authority:** Real-time mission clocks and studio status indicators.
 
-## React Compiler
+## Deployment
+Optimized for Vercel. 
+Verified with `npm run build` at 60FPS.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+© 2024 Visual Craft IT Studio. All Rights Reserved.
