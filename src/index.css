@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Syne:wght@400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&family=Syne:wght@400..800&family=Archivo:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-display: 'Syne', sans-serif;
+  --font-archivo: 'Archivo', sans-serif;
   
   --color-primary: #ffffff;
   --color-secondary: #a1a1aa;
@@ -46,10 +47,18 @@ body {
   min-height: 100vh;
 }
 
+/* Base Headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   letter-spacing: -0.04em;
   text-transform: uppercase;
+}
+
+/* Mobile Overrides: Use Archivo for everything */
+@media (max-width: 768px) {
+  * {
+    font-family: var(--font-archivo) !important;
+  }
 }
 
 .text-editorial {
