@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 export function Noise() {
   return (
     <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.035] mix-blend-overlay">
-      <div className="absolute inset-[-200%] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] animate-grain" />
+      <div className="absolute inset-[-200%] bg-grain animate-grain" />
     </div>
   )
 }

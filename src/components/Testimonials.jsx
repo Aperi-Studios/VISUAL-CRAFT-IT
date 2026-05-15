@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Star, Quote, Play, ChevronLeft, ChevronRight } from 'lucide-react'
 import { CinematicReveal } from './TextReveal'
